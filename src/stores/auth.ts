@@ -26,17 +26,7 @@ export const useAuthStore = defineStore("auth", {
       } catch (e: any) {
         Logger.error(`Failed to clear auth state from storage: + ${e.toString()}`);
       }
-    },
-    restoreFromStorage() {
-      try {
-        const token = localStorage.getItem("auth.token");
-        const user = localStorage.getItem("auth.user");
-        if (token) this.token = token;
-        if (user) this.user = JSON.parse(user);
-      } catch (e: any) {
-        Logger.error(`Failed to clear auth state from storage: + ${e.toString()}`);
-      }
-    },
+    }
   },
 });
 

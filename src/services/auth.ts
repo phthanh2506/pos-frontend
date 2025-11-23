@@ -32,4 +32,13 @@ export async function fetchCurrentUser() {
   return res
 }
 
-export default { login, register, forgotPassword, resetPassword, fetchCurrentUser }
+export async function logout() {
+  const store = useAuthStore()
+  const res = await apiRequest('/auth/logout', { method: 'POST' })
+  if (res.ok) {
+    store.clearAuth()
+  }
+  return res
+}
+
+export default { login, register, forgotPassword, resetPassword, fetchCurrentUser, logout }

@@ -56,6 +56,13 @@ function handleReset(token: string | null): ApiResponse {
   return { ok: false, error: "Invalid reset token (mock)" };
 }
 
+function handleLogout(token: string | null): ApiResponse {
+  if (token === "mock-token") {
+    return { ok: true, data: { message: "Logged out (mock)" } };
+  }
+  return { ok: false, error: "Unauthorized (mock)" };
+}
+
 export async function handleMockRequest(
   path: string,
   method = "GET",
@@ -73,6 +80,7 @@ export async function handleMockRequest(
   if (path === "/auth" && (method === "GET" || method === "POST"))
     return handleAuth(token);
   if (path === "/auth/reset" && method === "POST") return handleReset(token);
+  if (path === "/auth/logout" && method === "POST") return handleLogout(token);
 
   return { ok: false, error: "Not found (mock)" };
 }
